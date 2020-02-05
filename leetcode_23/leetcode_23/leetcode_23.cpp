@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <set>
 #include <map>
+#include <queue>
 using namespace std;
 /**
 * Definition for singly-linked list.
@@ -18,7 +19,41 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
-class Solution {
+struct cmp {
+	bool operator () (ListNode* &a, ListNode* &b)
+	{
+		return a->val > b->val;
+	}
+};
+
+class Solution{
+public:
+	ListNode* mergeKLists(vector<ListNode*>& lists) {
+		priority_queue < ListNode*, vector<ListNode*>, cmp> q;
+		ListNode *head	=	0, *_head	=	0;
+		for (int i = 0; i < lists.size(); i++)
+		{
+			if (lists[i])
+				q.push(lists[i]);
+		}
+		while (q.size())
+		{
+			if (!head)
+				head = _head = q.top();
+			else
+			{
+				_head->next = q.top();
+				_head = _head->next;
+			}
+			if (q.top()->next)
+				q.push(q.top()->next);
+			q.pop();
+		}
+		return head;
+	}
+};
+
+class Solution1 {
 public:
 	
 	ListNode* mergeKLists(vector<ListNode*>& lists) {
