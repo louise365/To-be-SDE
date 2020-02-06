@@ -19,7 +19,7 @@ struct Node {
 	}
 };
 
-class Solution {
+class Solution_stack1 {
 public:
 	int longestValidParentheses(string s) {
 		int ret = 0, current = 0;
@@ -105,13 +105,13 @@ public:
 		//if (nodeList.size())
 			//return nodeList[0]->e - nodeList[0]->s + 1;
 		for (int i = 0; i < nodeList.size(); i++)
-			if (ret < nodeList[0]->e - nodeList[0]->s + 1)
-				ret = nodeList[0]->e - nodeList[0]->s + 1;
+			if (ret < nodeList[i]->e - nodeList[i]->s + 1)
+				ret = nodeList[i]->e - nodeList[i]->s + 1;
 		return ret;
 	}
 };
 
-class Solution_fail2 {
+class Solution {
 public:
 	int longestValidParentheses(string s) {
 		stack<int> st;
