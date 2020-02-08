@@ -15,12 +15,14 @@ int main()
 		if (c == '\n')
 			break;
 		map[c]++;
-		count++;
+		if(c == 'P' || c == 'A' || c == 'T' ||
+			c == 'e' || c == 's' || c == 't')
+			count++;
 	}
-	char out[6] = {'P','A','T','e','s','t'};
+	char out[10] = { 'P','A','T','e','s','t' };
 	while (count)
 	{
-		for(int i = 0;i<6;i++)
+		for (int i = 0; i<6; i++)
 			if (map[out[i]])
 			{
 				putchar(out[i]);
@@ -29,6 +31,6 @@ int main()
 			}
 	}
 	printf("\n");
-    return 0;
+	return 0;
 }
 
