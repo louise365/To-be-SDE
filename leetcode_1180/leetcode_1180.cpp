@@ -1,36 +1,45 @@
-// leetcode_422.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// leetcode_1180.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
 #include <string>
 #include <vector>
 using namespace std;
+
 class Solution {
 public:
-    bool validWordSquare(vector<string>& words) {
-        bool ret = true;
-
-        for (int i = 0; i < words.size() && ret; i++)
+    int countLetters(string S) {
+        if (S.size() < 2)
+            return S.size();
+        vector<string> vt;
+        int sum = 0;
+        char pre = S[0];
+        int idx = 0;
+        for (int i = 1; i < S.size(); i++)
         {
-            int n = words[i].size();
-            for (int j = 0; j < n && ret; j++)
+            if (S[i] != pre)
             {
-                if (j > words.size() || words[i][j] != words[j][i])
-                {
-                    ret = false;
-                    break;
-                }
+                //sum += i - idx;
+                //vt.emplace_back(S.substr(idx,i-idx));
+                int n = i - idx;
+                sum += (1 + n) * (n) / 2;
+                pre = S[i];
+                idx = i;
             }
         }
-
-        return ret;
+        //if (idx != S.size() - 1)
+        {
+            //sum += S.size() - idx;
+            int n = S.size() - idx;
+            sum += (1 + n) * (n) / 2;
+            //vt.emplace_back(S.substr(idx, S.size() - idx));
+        }
+        
+        return sum;
     }
 };
 int main()
 {
-    Solution s;
-    vector<string> vt = { "abcd","bnrt","crm","dt" };
-    s.validWordSquare(vt);
     std::cout << "Hello World!\n";
 }
 

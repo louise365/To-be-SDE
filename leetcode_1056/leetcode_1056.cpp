@@ -1,34 +1,41 @@
-// leetcode_276.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// leetcode_1056.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
-//n = 1,k,2;
-//n=2,k*k,4;
-//n=3,k*(k-1)*2 + (k-1)*(k-1)*k = 2*1*2+1*1*2 = 6;
-//n=4,f(2) * 
-//f(n) = f(n-2) * (k-1) + f(n-1) * (k-1)
-//f(3) = f(1) * 1 + f(2) * 2 = 2 * 1 + 4 * 1
+#include <stack>
+#include <queue>
 using namespace std;
 class Solution {
+    char map[256];
 public:
-    int numWays(int n, int k) {
-        if (n == 1)
-            return k;
-        if (n == 2)
-            return k * k;
-        int pre1 = k, pre2 = k * k;
-        int t = 0;
-        for (int i = 3; i <= n; i++)
+    bool confusingNumber(int N) {
+        char map[256] = { 0 };
+        map['0'] = '0';
+        map['1'] = '1';
+        map['6'] = '9';
+        map['8'] = '8';
+        map['9'] = '6';
+        queue<int> vt;
+        int t = N;
+        while (t)
         {
-            t = (pre1 + pre2) * (k - 1);
-            pre1 = pre2;
-            pre2 = t;
+            if (map[t % 10+'0'] == 0)
+                return false;
+            vt.push(t % 10);
+            t /= 10;
         }
-        return t;
+        while (vt.size())
+        {
+            t = map[vt.front() + '0'] - '0' + t * 10;
+            vt.pop();
+        }
+        return t != N;
     }
 };
 int main()
 {
+    Solution s;
+    s.confusingNumber(6);
     std::cout << "Hello World!\n";
 }
 

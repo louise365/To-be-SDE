@@ -1,30 +1,24 @@
-// leetcode_276.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// leetcode_1196.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
-//n = 1,k,2;
-//n=2,k*k,4;
-//n=3,k*(k-1)*2 + (k-1)*(k-1)*k = 2*1*2+1*1*2 = 6;
-//n=4,f(2) * 
-//f(n) = f(n-2) * (k-1) + f(n-1) * (k-1)
-//f(3) = f(1) * 1 + f(2) * 2 = 2 * 1 + 4 * 1
+#include <vector>
+#include <algorithm>
 using namespace std;
 class Solution {
 public:
-    int numWays(int n, int k) {
-        if (n == 1)
-            return k;
-        if (n == 2)
-            return k * k;
-        int pre1 = k, pre2 = k * k;
-        int t = 0;
-        for (int i = 3; i <= n; i++)
+    int maxNumberOfApples(vector<int>& arr) {
+        sort(arr.begin(), arr.end());
+        int t = 5000;
+        int count = 0;
+        while (count < arr.size())
         {
-            t = (pre1 + pre2) * (k - 1);
-            pre1 = pre2;
-            pre2 = t;
+            if (t - arr[count] >= 0)
+                t -= arr[count++];
+            else
+                break;
         }
-        return t;
+        return count;
     }
 };
 int main()

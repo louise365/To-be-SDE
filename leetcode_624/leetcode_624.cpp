@@ -1,34 +1,35 @@
-// leetcode_276.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// leetcode_624.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
-//n = 1,k,2;
-//n=2,k*k,4;
-//n=3,k*(k-1)*2 + (k-1)*(k-1)*k = 2*1*2+1*1*2 = 6;
-//n=4,f(2) * 
-//f(n) = f(n-2) * (k-1) + f(n-1) * (k-1)
-//f(3) = f(1) * 1 + f(2) * 2 = 2 * 1 + 4 * 1
+#include <vector>
+#include <algorithm>
 using namespace std;
 class Solution {
 public:
-    int numWays(int n, int k) {
-        if (n == 1)
-            return k;
-        if (n == 2)
-            return k * k;
-        int pre1 = k, pre2 = k * k;
-        int t = 0;
-        for (int i = 3; i <= n; i++)
+    int maxDistance(vector<vector<int>>& arrays) {
+        int minV = arrays[0][0];
+        int maxV = arrays[0][arrays[0].size()-1];
+        int ret = 0;
+        for (int i = 1; i<arrays.size();i++)
         {
-            t = (pre1 + pre2) * (k - 1);
-            pre1 = pre2;
-            pre2 = t;
+            int ret1 = max(abs(minV - arrays[i][arrays[i].size() - 1]), abs(maxV - arrays[i][0]));
+            ret = max(ret1, ret);
+            minV = min(minV, arrays[i][0]);
+            maxV = max(maxV, arrays[i][arrays[i].size() - 1]);
         }
-        return t;
+        return ret;
     }
 };
 int main()
 {
+    Solution s;
+    vector<vector<int>> vt;
+    vector<int> v;
+    v = { 1 };
+    vt.push_back(v);
+    vt.push_back(v);
+    s.maxDistance(vt);
     std::cout << "Hello World!\n";
 }
 
