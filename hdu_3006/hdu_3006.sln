@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hdu_3006", "hdu_3006\hdu_3006.vcxproj", "{037AC4A2-0D20-45B3-8740-1313D7D2A07C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{037AC4A2-0D20-45B3-8740-1313D7D2A07C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{037AC4A2-0D20-45B3-8740-1313D7D2A07C}.Debug|Win32.Build.0 = Debug|Win32
+		{037AC4A2-0D20-45B3-8740-1313D7D2A07C}.Release|Win32.ActiveCfg = Release|Win32
+		{037AC4A2-0D20-45B3-8740-1313D7D2A07C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
