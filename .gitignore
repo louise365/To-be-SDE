@@ -3,8 +3,6 @@
 *.exe
 *.ilk 
 *pdb 
-*.filters 
-*.vcxproj 
 *.txt 
 *.obj 
 *.pch 
