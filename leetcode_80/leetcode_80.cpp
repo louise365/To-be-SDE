@@ -1,29 +1,36 @@
-﻿// leetcode_1035.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// leetcode_80.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <unordered_map>
 using namespace std;
 
 class Solution {
 public:
-    int maxUncrossedLines(vector<int>& A, vector<int>& B) {
-        int sizea = A.size();
-        int sizeb = B.size();
-        if (!sizea || !sizeb)
-            return 0;
-        vector<vector<int>> vt(sizea + 1, vector<int>(sizeb + 1, 0));
-        for (int i = 1; i <= sizea; ++i) {
-            for (int j = 1; j <= sizeb; ++j) {
-                if (A[i - 1] == B[j - 1])
-                    vt[i][j] = vt[i - 1][j - 1] + 1;
-                else
-                    vt[i][j] = max(vt[i - 1][j], vt[i][j - 1]);
+    int removeDuplicates(vector<int>& nums) {
+        if (nums.size() < 2)
+            return nums.size();
+        int curNum = nums[0];
+        int cnt = 1;
+        int size = nums.size();
+        for (int i = 1; i < size;) {
+            if (nums[i] == curNum) {
+                if (cnt == 2) {
+                    nums.erase(nums.begin() + i);
+                    --size;
+                }
+                else {
+                    ++cnt;
+                    ++i;
+                }
+            }
+            else {
+                curNum = nums[i];
+                cnt = 1;
+                ++i;
             }
         }
-        return vt[sizea][sizeb];
+        return size;
     }
 };
 int main()

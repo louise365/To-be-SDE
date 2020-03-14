@@ -1,34 +1,35 @@
-﻿// leetcode_1035.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// leetcode_1143.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
 #include <iostream>
 #include <vector>
+#include <string>
 #include <algorithm>
-#include <unordered_map>
 using namespace std;
 
 class Solution {
 public:
-    int maxUncrossedLines(vector<int>& A, vector<int>& B) {
-        int sizea = A.size();
-        int sizeb = B.size();
-        if (!sizea || !sizeb)
+    int longestCommonSubsequence(string text1, string text2) {
+        int size1 = text1.size();
+        int size2 = text2.size();
+        if (!size1 || !size2)
             return 0;
-        vector<vector<int>> vt(sizea + 1, vector<int>(sizeb + 1, 0));
-        for (int i = 1; i <= sizea; ++i) {
-            for (int j = 1; j <= sizeb; ++j) {
-                if (A[i - 1] == B[j - 1])
+        vector<vector<int>> vt(size1+1,vector<int> (size2+1,0));
+        for (int i = 1; i <= size1; ++i) {
+            for (int j = 1; j <= size2; ++j) {
+                if (text1[i-1] == text2[j-1])
                     vt[i][j] = vt[i - 1][j - 1] + 1;
                 else
                     vt[i][j] = max(vt[i - 1][j], vt[i][j - 1]);
             }
         }
-        return vt[sizea][sizeb];
+        return vt[size1][size2];
     }
 };
 int main()
 {
-    std::cout << "Hello World!\n";
+    Solution s;
+    s.longestCommonSubsequence("abc","def");
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
