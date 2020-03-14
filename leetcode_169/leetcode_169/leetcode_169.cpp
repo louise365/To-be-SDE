@@ -3,31 +3,28 @@
 
 #include "stdafx.h"
 #include <map>
+#include <unordered_map>
 #include <vector>
 using namespace std;
 
 class Solution {
 public:
 	int majorityElement(vector<int>& nums) {
-		map<int, int> mp;
-		vector<int>::iterator iter;
-		for (iter = nums.begin(); iter != nums.end(); iter++)
-		{
-			map<int, int>::iterator it = mp.find((*iter));
-			if (it == mp.end())
-				mp.insert(make_pair((*iter), 1));
-			else
-				(*it).second++;
-		}
-		map<int, int>::iterator it1;
-		int count = 0;
+		unordered_map<int, int> mp;
+		int n = nums.size();
+		n = (n + 1) >> 1;
 		int ret = 0;
-		for (it1 = mp.begin(); it1 != mp.end(); it1++)
+		for (auto i:nums)
 		{
-			if ((*it1).second > count)
+			unordered_map<int, int>::iterator it = mp.find(i);
+			if (it == mp.end())
+				it = (mp.emplace(make_pair(i, 1))).first;
+			else
+				++it->second;
+			if (it->second >= n)
 			{
-				count = (*it1).second;
-				ret = (*it1).first;
+				ret = it->first;
+				break;
 			}
 		}
 		return ret;
@@ -36,6 +33,9 @@ public:
 
 int main()
 {
+	Solution s;
+	vector<int> vt = { 3,2,3 };
+	s.majorityElement(vt);
     return 0;
 }
 

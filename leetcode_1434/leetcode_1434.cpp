@@ -7,16 +7,14 @@
 using namespace std;
 class Solution {
 public:
-    int maxSubArray(vector<int>& nums) {
-        if (nums.size() == 1)
-            return nums[0];
-        int sum = nums[0];
-        for (int i= 0;i<nums.size()-1;i++)
+    int trailingZeroes(int n) {
+        int ret = 0;
+        while (n)
         {
-            nums[i + 1] = nums[i] > 0 ? (nums[i + 1] +nums[i]): (nums[i+1]);
-            sum = max(sum, nums[i + 1]);
+            ret += n / 5;
+            n /= 5;
         }
-        return sum;
+        return ret;
     }
 };
 int main()

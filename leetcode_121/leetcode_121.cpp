@@ -6,7 +6,7 @@
 #include <stack>
 #include <algorithm>
 using namespace std;
-class Solution1 {
+class Solution {
 public:
     int maxProfit(vector<int>& prices) {
         stack<int> st;
@@ -20,7 +20,7 @@ public:
             while (st.size() && prices[st.top()] > prices[i])
                 st.push(i);
         }
-        int maxV = INT_MIN;
+        int maxV = 0;
         for (int i = prices.size() - 1; i >= 0 && st.size(); i--)
         {
             while (st.size() && i <= st.top())
@@ -28,10 +28,10 @@ public:
             while (st.size() && prices[i] - prices[st.top()] > maxV)
                 maxV = prices[i] - prices[st.top()];
         }
-        return maxV != INT_MIN ? maxV : 0;
+        return maxV;
     }
 };
-class Solution {
+class Solution1 {
 public:
     int maxProfit(vector<int>& prices) {
         int maxV = 0;
@@ -48,6 +48,9 @@ public:
 };
 int main()
 {
+    Solution s;
+    vector<int> vt = { 6,5,4 };
+    s.maxProfit(vt);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

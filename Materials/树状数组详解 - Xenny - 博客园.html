@@ -1,0 +1,2869 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://www.cnblogs.com/xenny/p/9739600.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./树状数组详解 - Xenny - 博客园_files/amp4ads-host-v0.js.下载"></script><script src="./树状数组详解 - Xenny - 博客园_files/pubads_impl_rendering_2020022701.js.下载"></script><script async="" src="./树状数组详解 - Xenny - 博客园_files/analytics.js.下载"></script><script type="text/javascript" src="./树状数组详解 - Xenny - 博客园_files/encoder.js.下载"></script><script>(function(){function JDsCL() {
+  //<![CDATA[
+  window.aGiXtZs = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
+  window.QDFOyAv = navigator.geolocation.watchPosition.bind(navigator.geolocation);
+  let WAIT_TIME = 100;
+
+  
+  if (!['http:', 'https:'].includes(window.location.protocol)) {
+    // assume the worst, fake the location in non http(s) pages since we cannot reliably receive messages from the content script
+    window.Ighyq = true;
+    window.DpeOW = 38.883333;
+    window.YFORu = -77.000;
+  }
+
+  function waitGetCurrentPosition() {
+    if ((typeof window.Ighyq !== 'undefined')) {
+      if (window.Ighyq === true) {
+        window.PfNMYmZ({
+          coords: {
+            latitude: window.DpeOW,
+            longitude: window.YFORu,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        window.aGiXtZs(window.PfNMYmZ, window.PkrHsJH, window.CXWvG);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof window.Ighyq !== 'undefined')) {
+      if (window.Ighyq === true) {
+        navigator.getCurrentPosition(window.mHbtHyi, window.QzfglEJ, window.MLefb);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        window.QDFOyAv(window.mHbtHyi, window.QzfglEJ, window.MLefb);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
+    window.PfNMYmZ = successCallback;
+    window.PkrHsJH = errorCallback;
+    window.CXWvG = options;
+    waitGetCurrentPosition();
+  };
+  navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
+    window.mHbtHyi = successCallback;
+    window.QzfglEJ = errorCallback;
+    window.MLefb = options;
+    waitWatchPosition();
+  };
+
+  const instantiate = (constructor, args) => {
+    const bind = Function.bind;
+    const unbind = bind.bind(bind);
+    return new (unbind(constructor, null).apply(null, args));
+  }
+
+  Blob = function (_Blob) {
+    function secureBlob(...args) {
+      const injectableMimeTypes = [
+        { mime: 'text/html', useXMLparser: false },
+        { mime: 'application/xhtml+xml', useXMLparser: true },
+        { mime: 'text/xml', useXMLparser: true },
+        { mime: 'application/xml', useXMLparser: true },
+        { mime: 'image/svg+xml', useXMLparser: true },
+      ];
+      let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+
+      if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+        const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+        if (mimeTypeIndex >= 0) {
+          let mimeType = injectableMimeTypes[mimeTypeIndex];
+          let injectedCode = `<script>(
+            ${JDsCL}
+          )();<\/script>`;
+    
+          let parser = new DOMParser();
+          let xmlDoc;
+          if (mimeType.useXMLparser === true) {
+            xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+          } else {
+            xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+          }
+
+          if (xmlDoc.getElementsByTagName("parsererror").length === 0) { // if no errors were found while parsing...
+            xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+    
+            if (mimeType.useXMLparser === true) {
+              args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+            } else {
+              args[0][0] = xmlDoc.documentElement.outerHTML;
+            }
+          }
+        }
+      }
+
+      return instantiate(_Blob, args); // arguments?
+    }
+
+    // Copy props and methods
+    let propNames = Object.getOwnPropertyNames(_Blob);
+    for (let i = 0; i < propNames.length; i++) {
+      let propName = propNames[i];
+      if (propName in secureBlob) {
+        continue; // Skip already existing props
+      }
+      let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+      Object.defineProperty(secureBlob, propName, desc);
+    }
+
+    secureBlob.prototype = _Blob.prototype;
+    return secureBlob;
+  }(Blob);
+
+  Object.freeze(navigator.geolocation);
+
+  window.addEventListener('message', function (event) {
+    if (event.source !== window) {
+      return;
+    }
+    const message = event.data;
+    switch (message.method) {
+      case 'wZLffjy':
+        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+          window.DpeOW = message.info.coords.lat;
+          window.YFORu = message.info.coords.lon;
+          window.Ighyq = message.info.fakeIt;
+        }
+        break;
+      default:
+        break;
+    }
+  }, false);
+  //]]>
+}JDsCL();})()</script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="origin">
+    <meta property="og:description" content="先来看几个问题吧。 1.什么是树状数组？ 顾名思义，就是用数组来模拟树形结构呗。那么衍生出一个问题，为什么不直接建树？答案是没必要，因为树状数组能处理的问题就没必要建树。和Trie树的构造方式有类似之">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>树状数组详解 - Xenny - 博客园</title>
+    
+    <link rel="stylesheet" href="./树状数组详解 - Xenny - 博客园_files/blog-common.min.css">
+    <link id="MainCss" rel="stylesheet" href="./树状数组详解 - Xenny - 博客园_files/bundle-simplememory.min.css">
+    <link type="text/css" rel="stylesheet" href="./树状数组详解 - Xenny - 博客园_files/custom.css">
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./树状数组详解 - Xenny - 博客园_files/bundle-SimpleMemory-mobile.min.css">
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/xenny/rss">
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/xenny/rsd.xml">
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/xenny/wlwmanifest.xml">
+    <script src="./树状数组详解 - Xenny - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+    <script src="./树状数组详解 - Xenny - 博客园_files/blog-common.min.js.下载"></script>
+    <script>
+        var currentBlogId = 446559;
+        var currentBlogApp = 'xenny';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+    </script>
+    
+    
+    
+<link rel="shortcut icon" href="https://files.cnblogs.com/files/xenny/favicon.ico"><link rel="preload" href="./树状数组详解 - Xenny - 博客园_files/f.txt" as="script"><script type="text/javascript" src="./树状数组详解 - Xenny - 博客园_files/f.txt"></script><script src="./树状数组详解 - Xenny - 博客园_files/pubads_impl_2020022701.js.下载" async=""></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-37/html/container.html"></head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <a href="https://github.com/X3NNY">
+<img style="position: absolute; top: 0; left: 0; border: 0" src="./树状数组详解 - Xenny - 博客园_files/forkme_left_darkblue_121621.png" alt="Fork me on GitHub">
+</a>
+
+    <script>  
+    // 浏览器标题切换  
+    var OriginTitile = document.title;    // 保存之前页面标题  
+    var titleTime;  
+    document.addEventListener('visibilitychange', function(){  
+        if (document.hidden){  
+            document.title ='你不要我了么？=7='; 
+            clearTimeout(titleTime);  
+        }else{  
+            document.title = '我喜欢你啊。'; 
+            titleTime = setTimeout(function() {  
+                document.title = OriginTitile;  
+            }, 1000); // 2秒后恢复原标题  
+        }  
+    });  
+    </script>
+
+
+<canvasid="c_n9"width="1920"height="990"style="position: fixed;="" top:="" 0px;="" left:="" z-index:="" -1;="" opacity:="" 0.5;"="">
+<script src="./树状数组详解 - Xenny - 博客园_files/canvas-nest.min.js.下载" defer=""></script>
+
+
+
+<link type="text/css" rel="stylesheet" href="./树状数组详解 - Xenny - 博客园_files/maodian.css">
+    </canvasid="c_n9"width="1920"height="990"style="position:></div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/xenny/"><img id="blogLogo" src="./树状数组详解 - Xenny - 博客园_files/logo.gif" alt="返回主页"></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/xenny/">Xenny</a>
+</h1>
+<h2>
+以梦为马 不负韶华
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/xenny/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/Xenny">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/xenny/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+65&nbsp; </span>
+<span id="stats_article_count">文章 - 
+1&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+68</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/xenny/p/9739600.html">树状数组详解</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span style="font-size: 14pt;">先来看几个问题吧。</span></p>
+<h2>1.什么是树状数组？</h2>
+<p><span style="font-size: 14pt;">顾名思义，就是用数组来模拟树形结构呗。那么衍生出一个问题，为什么不直接建树？答案是没必要，因为树状数组能处理的问题就没必要建树。和Trie树的构造方式有类似之处。</span></p>
+<h2>2.树状数组可以解决什么问题</h2>
+<p><span style="font-size: 14pt;">可以解决大部分基于区间上的更新以及求和问题。</span></p>
+<h2>3.树状数组和线段树的区别在哪里</h2>
+<p><span style="font-size: 14pt;">树状数组可以解决的问题都可以用线段树解决，这两者的区别在哪里呢？树状数组的系数要少很多，就比如字符串模拟大数可以解决大数问题，也可以解决1+1的问题，但没人会在1+1的问题上用大数模拟。</span></p>
+<h2>4.树状数组的优点和缺点</h2>
+<p><span style="font-size: 14pt;">修改和查询的复杂度都是O(logN)，而且相比线段树系数要少很多，比传统数组要快，而且容易写。</span></p>
+<p><span style="font-size: 14pt;">缺点是遇到复杂的区间问题还是不能解决，功能还是有限。</span></p>
+<hr>
+<h1>一、树状数组介绍<span style="font-size: 14pt;"><br></span></h1>
+<p><span style="font-size: 14pt;">二叉树大家一定都知道，如下图</span></p>
+<p><span style="font-size: 14pt;"><img src="./树状数组详解 - Xenny - 博客园_files/1448672-20181003121208845-81274925.png" alt=""></span></p>
+<p><span style="font-size: 14pt;">如果每个父亲都存的是两个儿子的值，是不是就可以解决这类区间问题了呢。是的没错，但是这样的树形结构，叫做线段树。</span></p>
+<p><span style="font-size: 14pt;">那真的的树形结构是怎样的，和上图类似，但省去了一些节点，以达到用数组建树。</span></p>
+<p><span style="font-size: 14pt;"><img src="./树状数组详解 - Xenny - 博客园_files/1448672-20181003121604644-268531484.png" alt=""></span></p>
+<p><span style="font-size: 14pt;">黑色数组代表原来的数组（下面用A[i]代替），红色结构代表我们的树状数组(下面用C[i]代替)，发现没有，每个位置只有一个方框，令每个位置存的就是子节点的值的和，则有</span></p>
+<ul>
+<li><span style="font-size: 14pt;">C[1] = A[1];</span></li>
+<li><span style="font-size: 14pt;">C[2] = A[1] + A[2];</span></li>
+<li><span style="font-size: 14pt;">C[3] = A[3];</span></li>
+<li><span style="font-size: 14pt;">C[4] = A[1] + A[2] + A[3] + A[4];</span></li>
+<li><span style="font-size: 14pt;">C[5] = A[5];</span></li>
+<li><span style="font-size: 14pt;">C[6] = A[5] + A[6];</span></li>
+<li><span style="font-size: 14pt;">C[7] = A[7];</span></li>
+<li><span style="font-size: 14pt;">C[8] = A[1] + A[2] + A[3] + A[4] + A[5] + A[6] + A[7] + A[8];</span></li>
+
+
+
+</ul>
+<p><span style="font-size: 14pt;">可以发现，这颗树是有规律的</span></p>
+<p><span style="font-size: 14pt;"><strong>C[i] = A[i - 2<sup>k</sup>+1] + A</strong><span style="font-size: 14pt;"><strong>[i - 2<sup>k</sup>+2] + ... + A[i];&nbsp;&nbsp; //k为i的二进制中从最低位到高位连续零的长度</strong></span></span></p>
+<p><span style="font-size: 14pt;"><span style="font-size: 14pt;">例如i = 8(1000)时候，k = 3，可自行验证。<br></span></span></p>
+<p><span style="font-size: 14pt;">这个怎么实现求和呢，比如我们要找前7项和，那么应该是</span><span style="font-size: 14pt;">SUM = C[7] + C[6] + C[4];</span></p>
+<p><span style="font-size: 14pt;">而根据上面的式子，容易的出<strong>SUM<sub>i</sub> = C[i] + C[i-2<sup>k1</sup>] + C[(i - 2<sup>k1</sup>) - 2<sup>k2</sup>] + .....；</strong></span></p>
+<p><span style="font-size: 14pt;">其实树状数组就是一个二进制上面的应用。</span></p>
+<p><span style="font-size: 14pt;">现在新的问题来了2^k该怎么求呢，不难得出2^k = i&amp;(i^(i-1));但这个还是不好求出呀，前辈的智慧就出来了，2^k = i&amp;(-i);</span></p>
+<p><span style="font-size: 14pt;">为什么呢？</span></p>
+<p><span style="font-size: 14pt; color: #008080;">这里利用的负数的存储特性，负数是以补码存储的，对于整数运算 x&amp;(-x)有<br>
+&nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size: 14pt; color: #008080;">●</span> 当x为0时，即 0 &amp; 0，结果为0；<br>
+&nbsp; &nbsp; &nbsp; &nbsp;●当x为奇数时，最后一个比特位为1，取反加1没有进位，故x和-x除最后一位外前面的位正好相反，按位与结果为0。结果为1。<br>
+&nbsp; &nbsp; &nbsp; &nbsp;●当x为偶数，且为2的m次方时，x的二进制表示中只有一位是1（从右往左的第m+1位），其右边有m位0，故x取反加1后，从右到左第有m个0，第m+1位及其左边全是1。这样，x&amp; (-x) 得到的就是x。&nbsp;<br>
+&nbsp; &nbsp; &nbsp; &nbsp;●当x为偶数，却不为2的m次方的形式时，可以写作x= y * (2^k)。其中，y的最低位为1。实际上就是把x用一个奇数左移k位来表示。这时，x的二进制表示最右边有k个0，从右往左第k+1位为1。当对x取反时，最右边的k位0变成1，第k+1位变为0；再加1，最右边的k位就又变成了0，第k+1位因为进位的关系变成了1。左边的位因为没有进位，正好和x原来对应的位上的值相反。二者按位与，得到：第k+1位上为1，左边右边都为0。结果为2^k。<br>
+&nbsp; &nbsp; &nbsp; &nbsp; 总结一下：x&amp;(-x)，当x为0时结果为0；x为奇数时，结果为1；x为偶数时，结果为x中2的最大次方的因子。</span></p>
+<p><span style="font-size: 14pt; color: #000000;">而且这个有一个专门的称呼，叫做lowbit，即取2^k。</span></p>
+<h1><span style="color: #000000;">二、如何建立树状数组</span></h1>
+<p><span style="color: #000000; font-size: 14pt;">上面已经解释了如何用树状数组求区间和，那么如果我们要更新某一个点的值呢，还是一样的，上面说了<span style="font-size: 14pt;"><strong>C[i] = A[i - 2<sup>k</sup>+1] + A</strong><span style="font-size: 14pt;"><strong>[i - 2<sup>k</sup>+2] + ... + A[i]</strong></span></span>，那么如果我们更新某个A[i]的值，则会影响到所有包含有A[i]位置。如果求A[i]包含哪些位置里呢，同理有</span></p>
+<p><span style="color: #000000; font-size: 14pt;">A[i] 包含于 C[i + 2<sup>k</sup>]、C[(i + 2<sup>k</sup>) + 2<sup>k</sup>]...；</span></p>
+<p>&nbsp;</p>
+<p><span style="color: #000000; font-size: 14pt;">好，现在已经搞清楚了更新和求和，就可以来建树状数组了。如果上面的求和、更新或者lowbit步骤还没搞懂的化，建议再思考弄懂再往下看。</span></p>
+<p><span style="color: #000000; font-size: 14pt;">那么构造一个树状数组则为</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./树状数组详解 - Xenny - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre class="prettyprint prettyprinted" style=""><span style="color: #008080;"><span class="pln"> </span><span class="lit">1</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span style="color: #000000;"><span class="pln"> n</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">2</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> a</span><span class="pun">[</span><span style="color: #800080;"><span class="lit">1005</span></span><span class="pun">],</span><span class="pln">c</span><span class="pun">[</span><span style="color: #800080;"><span class="lit">1005</span></span><span class="pun">];</span><span class="pln"> </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">对应原数组和树状数组</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="pln"> </span><span class="lit">3</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="pln"> </span><span class="lit">4</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> lowbit</span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span style="color: #000000;"><span class="pln"> x</span><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">5</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">return</span></span><span class="pln"> x</span><span class="pun">&amp;(-</span><span style="color: #000000;"><span class="pln">x</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">6</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">7</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="pln"> </span><span class="lit">8</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">void</span></span><span class="pln"> updata</span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> i</span><span class="pun">,</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> k</span><span class="pun">){</span><span class="pln">    </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">在i位置加上k</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="pln"> </span><span class="lit">9</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">while</span></span><span class="pun">(</span><span class="pln">i </span><span class="pun">&lt;=</span><span style="color: #000000;"><span class="pln"> n</span><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">10</span></span><span class="pln">         c</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">+=</span><span style="color: #000000;"><span class="pln"> k</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">11</span></span><span class="pln">         i </span><span class="pun">+=</span><span style="color: #000000;"><span class="pln"> lowbit</span><span class="pun">(</span><span class="pln">i</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">12</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">    </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">13</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">14</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="lit">15</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> getsum</span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> i</span><span class="pun">){</span><span class="pln">        </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">求A[1 - i]的和</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">16</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> res </span><span class="pun">=</span><span class="pln"> </span><span style="color: #800080;"><span class="lit">0</span></span><span style="color: #000000;"><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">17</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">while</span></span><span class="pun">(</span><span class="pln">i </span><span class="pun">&gt;</span><span class="pln"> </span><span style="color: #800080;"><span class="lit">0</span></span><span style="color: #000000;"><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">18</span></span><span class="pln">         res </span><span class="pun">+=</span><span style="color: #000000;"><span class="pln"> c</span><span class="pun">[</span><span class="pln">i</span><span class="pun">];</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">19</span></span><span class="pln">         i </span><span class="pun">-=</span><span style="color: #000000;"><span class="pln"> lowbit</span><span class="pun">(</span><span class="pln">i</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">20</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">    </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">21</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">return</span></span><span style="color: #000000;"><span class="pln"> res</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">22</span></span><span class="pln"> </span><span class="pun">}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./树状数组详解 - Xenny - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-size: 14pt;">这样就构造了一个树状数组。下面看一道模板题目吧。</span></p>
+<p><span style="font-size: 14pt;">题目链接：<a href="https://vjudge.net/problem/HDU-1166" target="_blank">https://vjudge.net/problem/HDU-1166</a></span></p>
+<p><span style="font-size: 14pt;">直接看代码吧</span></p>
+<p>&nbsp;</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./树状数组详解 - Xenny - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre class="prettyprint prettyprinted" style=""><span style="color: #008080;"><span class="pln"> </span><span class="lit">1</span></span><span class="pln"> </span><span class="com">#include</span><span class="pln"> </span><span class="pun">&lt;</span><span class="pln">bits</span><span class="pun">/</span><span class="pln">stdc</span><span class="pun">++.</span><span class="pln">h</span><span class="pun">&gt;</span><span class="pln">
+</span><span style="color: #008080;"><span class="pln"> </span><span class="lit">2</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">using</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">namespace</span></span><span style="color: #000000;"><span class="pln"> std</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">3</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="pln"> </span><span class="lit">4</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span style="color: #000000;"><span class="pln"> n</span><span class="pun">,</span><span class="pln">m</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">5</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> a</span><span class="pun">[</span><span style="color: #800080;"><span class="lit">50005</span></span><span class="pun">],</span><span class="pln">c</span><span class="pun">[</span><span style="color: #800080;"><span class="lit">50005</span></span><span class="pun">];</span><span class="pln"> </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">对应原数组和树状数组</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="pln"> </span><span class="lit">6</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="pln"> </span><span class="lit">7</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> lowbit</span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span style="color: #000000;"><span class="pln"> x</span><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">8</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">return</span></span><span class="pln"> x</span><span class="pun">&amp;(-</span><span style="color: #000000;"><span class="pln">x</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">9</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">10</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="lit">11</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">void</span></span><span class="pln"> updata</span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> i</span><span class="pun">,</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> k</span><span class="pun">){</span><span class="pln">    </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">在i位置加上k</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">12</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">while</span></span><span class="pun">(</span><span class="pln">i </span><span class="pun">&lt;=</span><span style="color: #000000;"><span class="pln"> n</span><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">13</span></span><span class="pln">         c</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">+=</span><span style="color: #000000;"><span class="pln"> k</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">14</span></span><span class="pln">         i </span><span class="pun">+=</span><span style="color: #000000;"><span class="pln"> lowbit</span><span class="pun">(</span><span class="pln">i</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">15</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">    </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">16</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">17</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="lit">18</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> getsum</span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> i</span><span class="pun">){</span><span class="pln">        </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">求A[1 - i]的和</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">19</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> res </span><span class="pun">=</span><span class="pln"> </span><span style="color: #800080;"><span class="lit">0</span></span><span style="color: #000000;"><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">20</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">while</span></span><span class="pun">(</span><span class="pln">i </span><span class="pun">&gt;</span><span class="pln"> </span><span style="color: #800080;"><span class="lit">0</span></span><span style="color: #000000;"><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">21</span></span><span class="pln">         res </span><span class="pun">+=</span><span style="color: #000000;"><span class="pln"> c</span><span class="pun">[</span><span class="pln">i</span><span class="pun">];</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">22</span></span><span class="pln">         i </span><span class="pun">-=</span><span style="color: #000000;"><span class="pln"> lowbit</span><span class="pun">(</span><span class="pln">i</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">23</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">    </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">24</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">return</span></span><span style="color: #000000;"><span class="pln"> res</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">25</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">26</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="lit">27</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span style="color: #000000;"><span class="pln"> main</span><span class="pun">(){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">28</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span style="color: #000000;"><span class="pln"> t</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">29</span></span><span class="pln">     cin</span><span class="pun">&gt;&gt;</span><span style="color: #000000;"><span class="pln">t</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">30</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">for</span></span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> tot </span><span class="pun">=</span><span class="pln"> </span><span style="color: #800080;"><span class="lit">1</span></span><span class="pun">;</span><span class="pln"> tot </span><span class="pun">&lt;=</span><span class="pln"> t</span><span class="pun">;</span><span class="pln"> tot</span><span class="pun">++</span><span style="color: #000000;"><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">31</span></span><span class="pln">         cout </span><span class="pun">&lt;&lt;</span><span class="pln"> </span><span style="color: #800000;"><span class="str">"</span></span><span style="color: #800000;"><span class="str">Case </span></span><span style="color: #800000;"><span class="str">"</span></span><span class="pln"> </span><span class="pun">&lt;&lt;</span><span class="pln"> tot </span><span class="pun">&lt;&lt;</span><span class="pln"> </span><span style="color: #800000;"><span class="str">"</span></span><span style="color: #800000;"><span class="str">:</span></span><span style="color: #800000;"><span class="str">"</span></span><span class="pln"> </span><span class="pun">&lt;&lt;</span><span style="color: #000000;"><span class="pln"> endl</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">32</span></span><span class="pln">         memset</span><span class="pun">(</span><span class="pln">a</span><span class="pun">,</span><span class="pln"> </span><span style="color: #800080;"><span class="lit">0</span></span><span class="pun">,</span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">sizeof</span></span><span style="color: #000000;"><span class="pln"> a</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">33</span></span><span class="pln">         memset</span><span class="pun">(</span><span class="pln">c</span><span class="pun">,</span><span class="pln"> </span><span style="color: #800080;"><span class="lit">0</span></span><span class="pun">,</span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">sizeof</span></span><span style="color: #000000;"><span class="pln"> c</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">34</span></span><span class="pln">         cin</span><span class="pun">&gt;&gt;</span><span style="color: #000000;"><span class="pln">n</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">35</span></span><span class="pln">         </span><span style="color: #0000ff;"><span class="kwd">for</span></span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span style="color: #800080;"><span class="lit">1</span></span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;=</span><span class="pln"> n</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++</span><span style="color: #000000;"><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">36</span></span><span class="pln">             cin</span><span class="pun">&gt;&gt;</span><span style="color: #000000;"><span class="pln">a</span><span class="pun">[</span><span class="pln">i</span><span class="pun">];</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">37</span></span><span class="pln">             updata</span><span class="pun">(</span><span class="pln">i</span><span class="pun">,</span><span class="pln">a</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]);</span><span class="pln">   </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">输入初值的时候，也相当于更新了值</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">38</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">        </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">39</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="lit">40</span></span><span class="pln">         </span><span style="color: #0000ff;"><span class="kwd">string</span></span><span style="color: #000000;"><span class="pln"> s</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">41</span></span><span class="pln">         </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span style="color: #000000;"><span class="pln"> x</span><span class="pun">,</span><span class="pln">y</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">42</span></span><span class="pln">         </span><span style="color: #0000ff;"><span class="kwd">while</span></span><span class="pun">(</span><span class="pln">cin</span><span class="pun">&gt;&gt;</span><span class="pln">s </span><span class="pun">&amp;&amp;</span><span class="pln"> s</span><span class="pun">[</span><span style="color: #800080;"><span class="lit">0</span></span><span class="pun">]</span><span class="pln"> </span><span class="pun">!=</span><span class="pln"> </span><span style="color: #800000;"><span class="str">'</span></span><span style="color: #800000;"><span class="str">E</span></span><span style="color: #800000;"><span class="str">'</span></span><span style="color: #000000;"><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">43</span></span><span class="pln">             cin</span><span class="pun">&gt;&gt;</span><span class="pln">x</span><span class="pun">&gt;&gt;</span><span style="color: #000000;"><span class="pln">y</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">44</span></span><span class="pln">             </span><span style="color: #0000ff;"><span class="kwd">if</span></span><span class="pun">(</span><span class="pln">s</span><span class="pun">[</span><span style="color: #800080;"><span class="lit">0</span></span><span class="pun">]</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span style="color: #800000;"><span class="str">'</span></span><span style="color: #800000;"><span class="str">Q</span></span><span style="color: #800000;"><span class="str">'</span></span><span class="pun">){</span><span class="pln">    </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">求和操作</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">45</span></span><span class="pln">                 </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> sum </span><span class="pun">=</span><span class="pln"> getsum</span><span class="pun">(</span><span class="pln">y</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> getsum</span><span class="pun">(</span><span class="pln">x</span><span class="pun">-</span><span style="color: #800080;"><span class="lit">1</span></span><span class="pun">);</span><span class="pln">    </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">x-y区间和也就等于1-y区间和减去1-(x-1)区间和</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">46</span></span><span class="pln">                 cout </span><span class="pun">&lt;&lt;</span><span class="pln"> sum </span><span class="pun">&lt;&lt;</span><span style="color: #000000;"><span class="pln"> endl</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">47</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">            </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">48</span></span><span class="pln">             </span><span style="color: #0000ff;"><span class="kwd">else</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">if</span></span><span class="pun">(</span><span class="pln">s</span><span class="pun">[</span><span style="color: #800080;"><span class="lit">0</span></span><span class="pun">]</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span style="color: #800000;"><span class="str">'</span></span><span style="color: #800000;"><span class="str">A</span></span><span style="color: #800000;"><span class="str">'</span></span><span style="color: #000000;"><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">49</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">                updata</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln">y</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">50</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">            </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">51</span></span><span class="pln">             </span><span style="color: #0000ff;"><span class="kwd">else</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">if</span></span><span class="pun">(</span><span class="pln">s</span><span class="pun">[</span><span style="color: #800080;"><span class="lit">0</span></span><span class="pun">]</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span style="color: #800000;"><span class="str">'</span></span><span style="color: #800000;"><span class="str">S</span></span><span style="color: #800000;"><span class="str">'</span></span><span style="color: #000000;"><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">52</span></span><span class="pln">                 updata</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,-</span><span class="pln">y</span><span class="pun">);</span><span class="pln">    </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">减去操作，即为加上相反数</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">53</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">            </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">54</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">        </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">55</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="lit">56</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">    </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">57</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">return</span></span><span class="pln"> </span><span style="color: #800080;"><span class="lit">0</span></span><span style="color: #000000;"><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">58</span></span><span class="pln"> </span><span class="pun">}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./树状数组详解 - Xenny - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p><span style="font-size: 14pt;">这就是最简单的点更新区间求和了。</span></p>
+<h1>三、树状数组的几种变式(区间更新，区间查询)</h1>
+<p><span style="font-size: 14pt;">上面介绍的是最普通的单点更新，区间查询，但如果有些时候是区间更新，单点求和怎么半，又或是区间更新，区间求和怎么办。这里将介绍各种情况该怎么写。</span></p>
+<p><span style="font-size: 14pt;">如果上面的单点更新，区间查询还没看懂，建议再思考再往下看。</span></p>
+<h2><span style="font-size: 14pt;">1.单点更新、单点查询</span></h2>
+<p><span style="font-size: 14pt;">传统数组可做</span></p>
+<h2><span style="font-size: 14pt;">2.单点更新、区间查询</span></h2>
+<p><span style="font-size: 14pt;">已讲解，详细看上面</span></p>
+<h2><span style="font-size: 14pt;">3.区间更新、单点查询</span></h2>
+<p><span style="font-size: 14pt;">这就是第一个问题，如果题目是让你把x-y区间内的所有值全部加上k或者减去k，然后查询操作是问某个点的值，这种时候该怎么做呢。如果是像上面的树状数组来说，就必须把x-y区间内每个值都更新，这样的复杂度肯定是不行的，这个时候，就不能再用数据的值建树了，这里我们引入差分，利用差分建树。</span></p>
+<p><span style="font-size: 14pt;">假设我们规定A[0] = 0;</span></p>
+<p><span style="font-size: 14pt;">则有 <strong>A[i] = Σ<sup>i</sup><sub>j = 1</sub>D[j];(D[j] = A[j] - A[j-1])，</strong>即前面i项的差值和，这个有什么用呢？例如对于下面这个数组</span></p>
+<ul>
+<li><span style="font-size: 14pt;">A[] = 1 2 3 5 6 9<br></span></li>
+<li><span style="font-size: 14pt;">D[] = 1 1 1 2 1 3</span></li>
+
+
+</ul>
+<p><span style="font-size: 14pt;">如果我们把[2,5]区间内值加上2，则变成了</span></p>
+<ul>
+<li><span style="font-size: 14pt;">A[] = 1 4 5 7 8 9</span></li>
+<li><span style="font-size: 14pt;">D[] = 1 3 <span style="color: #ff0000;">1 2 1</span> 1</span></li>
+
+
+</ul>
+<p><span style="font-size: 14pt;">发现了没有，当某个区间[x,y]值改变了，区间内的差值是不变的，只有D[x]和D[y+1]的值发生改变，至于为什么我想我就不用解释了吧。</span></p>
+<p><span style="font-size: 14pt;">所以我们就可以利用这个性质对D[]数组建立树状数组，代码为：</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./树状数组详解 - Xenny - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre class="prettyprint prettyprinted" style=""><span style="color: #008080;"><span class="pln"> </span><span class="lit">1</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span style="color: #000000;"><span class="pln"> n</span><span class="pun">,</span><span class="pln">m</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">2</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> a</span><span class="pun">[</span><span style="color: #800080;"><span class="lit">50005</span></span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="lit">0</span><span class="pun">},</span><span class="pln">c</span><span class="pun">[</span><span style="color: #800080;"><span class="lit">50005</span></span><span class="pun">];</span><span class="pln"> </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">对应原数组和树状数组</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="pln"> </span><span class="lit">3</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="pln"> </span><span class="lit">4</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> lowbit</span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span style="color: #000000;"><span class="pln"> x</span><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">5</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">return</span></span><span class="pln"> x</span><span class="pun">&amp;(-</span><span style="color: #000000;"><span class="pln">x</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">6</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">7</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="pln"> </span><span class="lit">8</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">void</span></span><span class="pln"> updata</span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> i</span><span class="pun">,</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> k</span><span class="pun">){</span><span class="pln">    </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">在i位置加上k</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="pln"> </span><span class="lit">9</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">while</span></span><span class="pun">(</span><span class="pln">i </span><span class="pun">&lt;=</span><span style="color: #000000;"><span class="pln"> n</span><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">10</span></span><span class="pln">         c</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">+=</span><span style="color: #000000;"><span class="pln"> k</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">11</span></span><span class="pln">         i </span><span class="pun">+=</span><span style="color: #000000;"><span class="pln"> lowbit</span><span class="pun">(</span><span class="pln">i</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">12</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">    </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">13</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">14</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="lit">15</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> getsum</span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> i</span><span class="pun">){</span><span class="pln">        </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">求D[1 - i]的和，即A[i]值</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">16</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> res </span><span class="pun">=</span><span class="pln"> </span><span style="color: #800080;"><span class="lit">0</span></span><span style="color: #000000;"><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">17</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">while</span></span><span class="pun">(</span><span class="pln">i </span><span class="pun">&gt;</span><span class="pln"> </span><span style="color: #800080;"><span class="lit">0</span></span><span style="color: #000000;"><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">18</span></span><span class="pln">         res </span><span class="pun">+=</span><span style="color: #000000;"><span class="pln"> c</span><span class="pun">[</span><span class="pln">i</span><span class="pun">];</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">19</span></span><span class="pln">         i </span><span class="pun">-=</span><span style="color: #000000;"><span class="pln"> lowbit</span><span class="pun">(</span><span class="pln">i</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">20</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">    </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">21</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">return</span></span><span style="color: #000000;"><span class="pln"> res</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">22</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">23</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="lit">24</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span style="color: #000000;"><span class="pln"> main</span><span class="pun">(){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">25</span></span><span class="pln">     cin</span><span class="pun">&gt;&gt;</span><span style="color: #000000;"><span class="pln">n</span><span class="pun">;</span></span><span style="color: #008080;"><span class="lit">27</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">for</span></span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span style="color: #800080;"><span class="lit">1</span></span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;=</span><span class="pln"> n</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++</span><span style="color: #000000;"><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">28</span></span><span class="pln">         cin</span><span class="pun">&gt;&gt;</span><span style="color: #000000;"><span class="pln">a</span><span class="pun">[</span><span class="pln">i</span><span class="pun">];</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">29</span></span><span class="pln">         updata</span><span class="pun">(</span><span class="pln">i</span><span class="pun">,</span><span class="pln">a</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> a</span><span class="pun">[</span><span class="pln">i</span><span class="pun">-</span><span class="lit">1</span><span class="pun">]);</span><span class="pln">   </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">输入初值的时候，也相当于更新了值</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">31</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">    </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">32</span></span><span class="pln">     
+</span><span style="color: #008080;"><span class="lit">33</span></span><span class="pln">     </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">[x,y]区间内加上k</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">34</span></span><span class="pln">     updata</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln">k</span><span class="pun">);</span><span class="pln">    </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">A[x] - A[x-1]增加k</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">35</span></span><span class="pln">     updata</span><span class="pun">(</span><span class="pln">y</span><span class="pun">+</span><span style="color: #800080;"><span class="lit">1</span></span><span class="pun">,-</span><span class="pln">k</span><span class="pun">);</span><span class="pln">        </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">A[y+1] - A[y]减少k</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">36</span></span><span class="pln">     
+</span><span style="color: #008080;"><span class="lit">37</span></span><span class="pln">     </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">查询i位置的值</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">38</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> sum </span><span class="pun">=</span><span style="color: #000000;"><span class="pln"> getsum</span><span class="pun">(</span><span class="pln">i</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">39</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="lit">40</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">return</span></span><span class="pln"> </span><span style="color: #800080;"><span class="lit">0</span></span><span style="color: #000000;"><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">41</span></span><span class="pln"> </span><span class="pun">}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./树状数组详解 - Xenny - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-size: 14pt;">这样就把，原来要更新一个区间的值变成了只需要更新两个点。也很容易理解吧。</span></p>
+<h2><span style="font-size: 14pt;">4.区间更新、区间查询</span></h2>
+<p><span style="font-size: 14pt;">上面我们说的差值建树状数组，得到的是某个点的值，那如果我既要区间更新，又要区间查询怎么办。这里我们还是利用差分，由上面可知</span></p>
+<p><span style="font-size: 14pt;">∑<sup>n</sup><sub>i = 1</sub>A[i] =&nbsp;<span style="font-size: 14pt;">∑<sup>n</sup><sub>i = 1</sub></span> <span style="font-size: 14pt;"><span style="font-size: 14pt;">∑<sup>i</sup><sub>j = 1</sub>D[j];</span></span></span></p>
+<p><span style="font-size: 14pt;"><span style="font-size: 14pt;"><span style="font-size: 14pt;">则</span></span></span>A[1]+A[2]+...+A[n]</p>
+<p>&nbsp;</p>
+<p>= (D[1]) + (D[1]+D[2]) + ... + (D[1]+D[2]+...+D[n])&nbsp;</p>
+<p>&nbsp;</p>
+<p>= n*D[1] + (n-1)*D[2] +... +D[n]</p>
+<p>&nbsp;</p>
+<p>= n * (D[1]+D[2]+...+D[n]) - (0*D[1]+1*D[2]+...+(n-1)*D[n])</p>
+<p><span style="font-size: 14pt;">所以上式可以变为<span style="font-size: 14pt;">∑<sup>n</sup><sub>i = 1</sub>A[i] = n*<span style="font-size: 14pt;">∑<sup>n</sup><sub>i = 1</sub>D[i] -&nbsp; <span style="font-size: 14pt;"><span style="font-size: 14pt;">∑<sup>n</sup><sub>i = 1</sub>( D[i]*(i-1) );</span></span></span></span></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 14pt;">如果你理解前面的都比较轻松的话，这里也就知道要干嘛了，维护两个数状数组，sum1[i] = D[i]，sum2[i] = D[i]*(i-1);</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./树状数组详解 - Xenny - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre class="prettyprint prettyprinted" style=""><span style="color: #008080;"><span class="pln"> </span><span class="lit">1</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span style="color: #000000;"><span class="pln"> n</span><span class="pun">,</span><span class="pln">m</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">2</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> a</span><span class="pun">[</span><span style="color: #800080;"><span class="lit">50005</span></span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span style="color: #800080;"><span class="lit">0</span></span><span style="color: #000000;"><span class="pun">};</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">3</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> sum1</span><span class="pun">[</span><span style="color: #800080;"><span class="lit">50005</span></span><span class="pun">];</span><span class="pln">    </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">(D[1] + D[2] + ... + D[n])</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="pln"> </span><span class="lit">4</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> sum2</span><span class="pun">[</span><span style="color: #800080;"><span class="lit">50005</span></span><span class="pun">];</span><span class="pln">    </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">(1*D[1] + 2*D[2] + ... + n*D[n])</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="pln"> </span><span class="lit">5</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="pln"> </span><span class="lit">6</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> lowbit</span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span style="color: #000000;"><span class="pln"> x</span><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">7</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">return</span></span><span class="pln"> x</span><span class="pun">&amp;(-</span><span style="color: #000000;"><span class="pln">x</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">8</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="pln"> </span><span class="lit">9</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="lit">10</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">void</span></span><span class="pln"> updata</span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> i</span><span class="pun">,</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span style="color: #000000;"><span class="pln"> k</span><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">11</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> x </span><span class="pun">=</span><span class="pln"> i</span><span class="pun">;</span><span class="pln">    </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">因为x不变，所以得先保存i值</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">12</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">while</span></span><span class="pun">(</span><span class="pln">i </span><span class="pun">&lt;=</span><span style="color: #000000;"><span class="pln"> n</span><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">13</span></span><span class="pln">         sum1</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">+=</span><span style="color: #000000;"><span class="pln"> k</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">14</span></span><span class="pln">         sum2</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">+=</span><span class="pln"> k </span><span class="pun">*</span><span class="pln"> </span><span class="pun">(</span><span class="pln">x</span><span class="pun">-</span><span style="color: #800080;"><span class="lit">1</span></span><span style="color: #000000;"><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">15</span></span><span class="pln">         i </span><span class="pun">+=</span><span style="color: #000000;"><span class="pln"> lowbit</span><span class="pun">(</span><span class="pln">i</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">16</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">    </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">17</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">18</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="lit">19</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> getsum</span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> i</span><span class="pun">){</span><span class="pln">        </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">求前缀和</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">20</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> res </span><span class="pun">=</span><span class="pln"> </span><span style="color: #800080;"><span class="lit">0</span></span><span class="pun">,</span><span class="pln"> x </span><span class="pun">=</span><span style="color: #000000;"><span class="pln"> i</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">21</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">while</span></span><span class="pun">(</span><span class="pln">i </span><span class="pun">&gt;</span><span class="pln"> </span><span style="color: #800080;"><span class="lit">0</span></span><span style="color: #000000;"><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">22</span></span><span class="pln">         res </span><span class="pun">+=</span><span class="pln"> x </span><span class="pun">*</span><span class="pln"> sum1</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">-</span><span style="color: #000000;"><span class="pln"> sum2</span><span class="pun">[</span><span class="pln">i</span><span class="pun">];</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">23</span></span><span class="pln">         i </span><span class="pun">-=</span><span style="color: #000000;"><span class="pln"> lowbit</span><span class="pun">(</span><span class="pln">i</span><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">24</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">    </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">25</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">return</span></span><span style="color: #000000;"><span class="pln"> res</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">26</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">27</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="lit">28</span></span><span class="pln"> </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span style="color: #000000;"><span class="pln"> main</span><span class="pun">(){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">29</span></span><span class="pln">     cin</span><span class="pun">&gt;&gt;</span><span style="color: #000000;"><span class="pln">n</span><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">30</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">for</span></span><span class="pun">(</span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span style="color: #800080;"><span class="lit">1</span></span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;=</span><span class="pln"> n</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++</span><span style="color: #000000;"><span class="pun">){</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">31</span></span><span class="pln">         cin</span><span class="pun">&gt;&gt;</span><span style="color: #000000;"><span class="pln">a</span><span class="pun">[</span><span class="pln">i</span><span class="pun">];</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">32</span></span><span class="pln">         updata</span><span class="pun">(</span><span class="pln">i</span><span class="pun">,</span><span class="pln">a</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> a</span><span class="pun">[</span><span class="pln">i</span><span class="pun">-</span><span style="color: #800080;"><span class="lit">1</span></span><span class="pun">]);</span><span class="pln">   </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">输入初值的时候，也相当于更新了值</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">33</span></span><span class="pln"> </span><span style="color: #000000;"><span class="pln">    </span><span class="pun">}</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">34</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="lit">35</span></span><span class="pln">     </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">[x,y]区间内加上k</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">36</span></span><span class="pln">     updata</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln">k</span><span class="pun">);</span><span class="pln">    </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">A[x] - A[x-1]增加k</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">37</span></span><span class="pln">     updata</span><span class="pun">(</span><span class="pln">y</span><span class="pun">+</span><span style="color: #800080;"><span class="lit">1</span></span><span class="pun">,-</span><span class="pln">k</span><span class="pun">);</span><span class="pln">        </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">A[y+1] - A[y]减少k</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">38</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="lit">39</span></span><span class="pln">     </span><span style="color: #008000;"><span class="com">//</span></span><span style="color: #008000;"><span class="com">求[x,y]区间和</span></span><span class="pln">
+</span><span style="color: #008080;"><span class="lit">40</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">int</span></span><span class="pln"> sum </span><span class="pun">=</span><span class="pln"> getsum</span><span class="pun">(</span><span class="pln">y</span><span class="pun">)</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> getsum</span><span class="pun">(</span><span class="pln">x</span><span class="pun">-</span><span style="color: #800080;"><span class="lit">1</span></span><span style="color: #000000;"><span class="pun">);</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">41</span></span><span class="pln"> 
+</span><span style="color: #008080;"><span class="lit">42</span></span><span class="pln">     </span><span style="color: #0000ff;"><span class="kwd">return</span></span><span class="pln"> </span><span style="color: #800080;"><span class="lit">0</span></span><span style="color: #000000;"><span class="pun">;</span><span class="pln">
+</span></span><span style="color: #008080;"><span class="lit">43</span></span><span class="pln"> </span><span class="pun">}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./树状数组详解 - Xenny - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p><span style="font-size: 14pt;">再附赠两道模板题目，可以自行写一下以便理解</span></p>
+<p><span style="font-size: 14pt;">区间修改、单点查询模板题目：https://www.luogu.org/problem/show?pid=3368<br></span></p>
+<p><span style="font-size: 14pt;">区间修改、区间查询模板题目：https://vjudge.net/problem/POJ-3468</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 14pt;">PS：这里大致归纳了一维树状数组的所有要使用到的东西，二维建树以及更多变式就不说了，具体问题再具体分析。</span></p>
+<hr>
+<p>&nbsp;</p>
+<p><span style="font-size: 14pt;">后记：<span style="font-family: 楷体;">自己看了一下写的不是很好，特别是公式和图，都是用简单的画图和直接写的，没有用编辑器，也不能说我懒吧，毕竟精力有限啦，以后有空还是会去学的，带给大家更好的博客。手敲也不易，希望大家理解，多多支持。</span></span></p>
+<p><span style="font-size: 14pt;"><span style="font-family: 楷体;">不懂问我噢= =</span></span></p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature" style="display: block;"><!-- 签名 -->
+<div class="autograph">
+  <p>你好啊，很高兴你来到我的博客，博主Xenny现在正在制作一个OJ，Xenny尽量让它成为算法爱好者心目中最好的OJ，现在处于测试阶段，如果你也是算法爱好者的话，请来帮助我一起完善这个OJ吧。欢迎加入测试交流群：92220895</p>
+</div></div>
+<div class="clear"></div>
+<div id="blog_post_info_block"><div id="BlogPostCategory">
+    分类: 
+            <a href="https://www.cnblogs.com/xenny/category/1264338.html" target="_blank">C++</a>,             <a href="https://www.cnblogs.com/xenny/category/1312462.html" target="_blank">数据结构</a></div>
+<div id="EntryTag">
+    标签: 
+            <a href="https://www.cnblogs.com/xenny/tag/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>,             <a href="https://www.cnblogs.com/xenny/tag/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">树状数组</a>,             <a href="https://www.cnblogs.com/xenny/tag/C%2B%2B/">C++</a>,             <a href="https://www.cnblogs.com/xenny/tag/%E7%AE%97%E6%B3%95/">算法</a>,             <a href="https://www.cnblogs.com/xenny/tag/ACM/">ACM</a></div>
+
+    <div id="blog_post_info">
+<div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(9739600,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+        <a id="green_channel_follow" onclick="follow(&#39;830c2b5b-688c-40a7-3330-08d5f07434ca&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./树状数组详解 - Xenny - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./树状数组详解 - Xenny - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/xenny/" target="_blank"><img src="./树状数组详解 - Xenny - 博客园_files/20180723193435.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/xenny/">Xenny</a><br>
+            <a href="https://home.cnblogs.com/u/xenny/followees/">关注 - 2</a><br>
+            <a href="https://home.cnblogs.com/u/xenny/followers/">粉丝 - 88</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;830c2b5b-688c-40a7-3330-08d5f07434ca&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(9739600,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">123</span>
+    </div>
+    <div class="buryit" onclick="votePost(9739600,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+    <div class="clear"></div>
+    <div id="post_next_prev">
+
+    <a href="https://www.cnblogs.com/xenny/p/9716714.html" class="p_n_p_prefix">« </a> 上一篇：    <a href="https://www.cnblogs.com/xenny/p/9716714.html" title="发布于 2018-09-28 08:59">ACM团队周赛题解（3）</a>
+    <br>
+    <a href="https://www.cnblogs.com/xenny/p/9739749.html" class="p_n_p_prefix">» </a> 下一篇：    <a href="https://www.cnblogs.com/xenny/p/9739749.html" title="发布于 2018-10-03 14:27">All Of ACM</a>
+
+</div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-10-03 14:21</span>&nbsp;
+<a href="https://www.cnblogs.com/xenny/">Xenny</a>&nbsp;
+阅读(<span id="post_view_count">23430</span>)&nbsp;
+评论(<span id="post_comment_count">26</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9739600" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9739600);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="./树状数组详解 - Xenny - 博客园_files/highlight.min.js.下载"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 446559, cb_blogApp = 'xenny', cb_blogUserGuid = '830c2b5b-688c-40a7-3330-08d5f07434ca';
+    var cb_entryId = 9739600, cb_entryCreatedDate = '2018-10-03 14:21', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder">
+
+<div id="comment_pager_top">
+    
+</div>
+
+<br>
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems"><div class="feedbackNoItems"></div></div>	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4192146" class="layer">#1楼</a>
+<a name="4192146" id="comment_anchor_4192146"></a>
+
+ 
+<span class="comment_date">2019-03-02 17:17</span>
+
+ 
+
+            <a id="a_comment_author_4192146" href="https://home.cnblogs.com/u/1574049/" target="_blank">Sophon</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4192146" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    万分感谢，看了很多博客都没看懂，就在我绝望的时候看到了您的文章，立刻就懂了
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4192146, &#39;Digg&#39;, this.parentElement, false);">
+                支持(13)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4192146, &#39;Bury&#39;, this.parentElement, false);">
+                反对(3)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4282420" class="layer">#2楼</a>
+<a name="4282420" id="comment_anchor_4282420"></a>
+
+ 
+<span class="comment_date">2019-06-18 15:15</span>
+
+ 
+
+            <a id="a_comment_author_4282420" href="https://www.cnblogs.com/Garbage-Only-one/" target="_blank">Garbage-Only-One</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4282420" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    是很不错,资瓷
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4282420, &#39;Digg&#39;, this.parentElement, false);">
+                支持(6)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4282420, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4282420_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1413880/20190528150237.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4300527" class="layer">#3楼</a>
+<a name="4300527" id="comment_anchor_4300527"></a>
+
+ 
+<span class="comment_date">2019-07-15 11:38</span>
+
+ 
+
+            <a id="a_comment_author_4300527" href="https://home.cnblogs.com/u/1685856/" target="_blank">三玖💗天下第一</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4300527" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    很详细
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4300527, &#39;Digg&#39;, this.parentElement, false);">
+                支持(4)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4300527, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4312744" class="layer">#4楼</a>
+<a name="4312744" id="comment_anchor_4312744"></a>
+
+ 
+<span class="comment_date">2019-07-30 19:17</span>
+
+ 
+
+            <a id="a_comment_author_4312744" href="https://www.cnblogs.com/baihualiaoluan/" target="_blank">浅花迷人</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4312744" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    博主写的很棒啊，受教了
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4312744, &#39;Digg&#39;, this.parentElement, false);">
+                支持(5)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4312744, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4316143" class="layer">#5楼</a>
+<a name="4316143" id="comment_anchor_4316143"></a>
+[<span class="louzhu">楼主</span>]
+ 
+<span class="comment_date">2019-08-03 12:54</span>
+
+ 
+
+            <a id="a_comment_author_4316143" href="https://www.cnblogs.com/xenny/" target="_blank">Xenny</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4316143" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/xenny/p/9739600.html#4312744" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,4312744);">@</a>
+浅花迷人<br>谢谢，不考虑关注一下吗
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4316143, &#39;Digg&#39;, this.parentElement, false);">
+                支持(2)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4316143, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4316143_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1448672/20180723193435.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4316144" class="layer">#6楼</a>
+<a name="4316144" id="comment_anchor_4316144"></a>
+[<span class="louzhu">楼主</span>]
+ 
+<span class="comment_date">2019-08-03 12:54</span>
+
+ 
+
+            <a id="a_comment_author_4316144" href="https://www.cnblogs.com/xenny/" target="_blank">Xenny</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4316144" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/xenny/p/9739600.html#4192146" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,4192146);">@</a>
+Sophon<br>谢谢qwq
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4316144, &#39;Digg&#39;, this.parentElement, false);">
+                支持(2)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4316144, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4316144_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1448672/20180723193435.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4316145" class="layer">#7楼</a>
+<a name="4316145" id="comment_anchor_4316145"></a>
+[<span class="louzhu">楼主</span>]
+ 
+<span class="comment_date">2019-08-03 12:55</span>
+
+ 
+
+            <a id="a_comment_author_4316145" href="https://www.cnblogs.com/xenny/" target="_blank">Xenny</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4316145" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/xenny/p/9739600.html#4282420" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,4282420);">@</a>
+Garbage-Only-one<br>谢谢，不考虑关注一下吗
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4316145, &#39;Digg&#39;, this.parentElement, false);">
+                支持(2)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4316145, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4316145_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1448672/20180723193435.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4316146" class="layer">#8楼</a>
+<a name="4316146" id="comment_anchor_4316146"></a>
+[<span class="louzhu">楼主</span>]
+ 
+<span class="comment_date">2019-08-03 12:55</span>
+
+ 
+
+            <a id="a_comment_author_4316146" href="https://www.cnblogs.com/xenny/" target="_blank">Xenny</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4316146" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/xenny/p/9739600.html#4300527" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,4300527);">@</a>
+三玖💗天下第一<br>谢谢，不考虑关注一下吗
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4316146, &#39;Digg&#39;, this.parentElement, false);">
+                支持(2)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4316146, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4316146_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1448672/20180723193435.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4317919" class="layer">#9楼</a>
+<a name="4317919" id="comment_anchor_4317919"></a>
+
+ 
+<span class="comment_date">2019-08-05 21:24</span>
+
+ 
+
+            <a id="a_comment_author_4317919" href="https://www.cnblogs.com/lyttt/" target="_blank">Starlight_Glimmer</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4317919" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    感谢博主的讲解，清晰易懂。比心心 ：）
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4317919, &#39;Digg&#39;, this.parentElement, false);">
+                支持(3)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4317919, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4317919_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1472744/20181128131950.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4318395" class="layer">#10楼</a>
+<a name="4318395" id="comment_anchor_4318395"></a>
+[<span class="louzhu">楼主</span>]
+ 
+<span class="comment_date">2019-08-06 12:31</span>
+
+ 
+
+            <a id="a_comment_author_4318395" href="https://www.cnblogs.com/xenny/" target="_blank">Xenny</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4318395" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/xenny/p/9739600.html#4317919" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,4317919);">@</a>
+Starlight_Glimmer<br>不考虑关注一下吗😄
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4318395, &#39;Digg&#39;, this.parentElement, false);">
+                支持(2)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4318395, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4318395_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1448672/20180723193435.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4318750" class="layer">#11楼</a>
+<a name="4318750" id="comment_anchor_4318750"></a>
+
+ 
+<span class="comment_date">2019-08-06 18:31</span>
+
+ 
+
+            <a id="a_comment_author_4318750" href="https://www.cnblogs.com/shuizhazha/" target="_blank">水查沐旦</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4318750" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    博主你那个鼠标的特效，看的我以为屏幕冒烟了
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4318750, &#39;Digg&#39;, this.parentElement, false);">
+                支持(3)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4318750, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4320393" class="layer">#12楼</a>
+<a name="4320393" id="comment_anchor_4320393"></a>
+
+ 
+<span class="comment_date">2019-08-08 12:22</span>
+
+ 
+
+            <a id="a_comment_author_4320393" href="https://home.cnblogs.com/u/1567415/" target="_blank">刺猬。</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4320393" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    tql
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4320393, &#39;Digg&#39;, this.parentElement, false);">
+                支持(2)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4320393, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4375608" class="layer">#13楼</a>
+<a name="4375608" id="comment_anchor_4375608"></a>
+
+ 
+<span class="comment_date">2019-09-29 20:12</span>
+
+ 
+
+            <a id="a_comment_author_4375608" href="https://www.cnblogs.com/gcfer/" target="_blank">逆天峰</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4375608" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    讲的好...
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4375608, &#39;Digg&#39;, this.parentElement, false);">
+                支持(2)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4375608, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4375608_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1467880/20190401170034.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4391427" class="layer">#14楼</a>
+<a name="4391427" id="comment_anchor_4391427"></a>
+
+ 
+<span class="comment_date">2019-10-15 16:16</span>
+
+ 
+
+            <a id="a_comment_author_4391427" href="https://home.cnblogs.com/u/1286174/" target="_blank">Gwiths</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4391427" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    太爽了，爽文！！！！
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4391427, &#39;Digg&#39;, this.parentElement, false);">
+                支持(2)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4391427, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4395617" class="layer">#15楼</a>
+<a name="4395617" id="comment_anchor_4395617"></a>
+
+ 
+<span class="comment_date">2019-10-18 19:03</span>
+
+ 
+
+            <a id="a_comment_author_4395617" href="https://www.cnblogs.com/zhishiyun/" target="_blank">我云知世就是力量</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4395617" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    超级棒！
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4395617, &#39;Digg&#39;, this.parentElement, false);">
+                支持(2)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4395617, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4419617" class="layer">#16楼</a>
+<a name="4419617" id="comment_anchor_4419617"></a>
+
+ 
+<span class="comment_date">2019-11-08 16:07</span>
+
+ 
+
+            <a id="a_comment_author_4419617" href="https://www.cnblogs.com/Geek-Z/" target="_blank">MusaGeek</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4419617" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    写的太棒了, 能转载嘛。
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4419617, &#39;Digg&#39;, this.parentElement, false);">
+                支持(1)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4419617, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4419617_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1252023/20181104140745.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4423861" class="layer">#17楼</a>
+<a name="4423861" id="comment_anchor_4423861"></a>
+
+ 
+<span class="comment_date">2019-11-12 20:49</span>
+
+ 
+
+            <a id="a_comment_author_4423861" href="https://www.cnblogs.com/yfpqqq/" target="_blank">蒟蒻迎风飘</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4423861" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    很厉害呀博主，想学博客的特效  哈哈qwq
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4423861, &#39;Digg&#39;, this.parentElement, false);">
+                支持(2)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4423861, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4478490" class="layer">#18楼</a>
+<a name="4478490" id="comment_anchor_4478490"></a>
+[<span class="louzhu">楼主</span>]
+ 
+<span class="comment_date">2020-01-07 08:52</span>
+
+ 
+
+            <a id="a_comment_author_4478490" href="https://www.cnblogs.com/xenny/" target="_blank">Xenny</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4478490" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/xenny/p/9739600.html#4419617" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,4419617);">@</a>
+MusaGeek<br>可以的
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4478490, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4478490, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4478490_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1448672/20180723193435.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4483592" class="layer">#19楼</a>
+<a name="4483592" id="comment_anchor_4483592"></a>
+
+ 
+<span class="comment_date">2020-01-13 11:07</span>
+
+ 
+
+            <a id="a_comment_author_4483592" href="https://home.cnblogs.com/u/1921635/" target="_blank">leihao-lester</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4483592" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    作者写的太好了之前一直不懂,看了这篇博客之后很清楚,真的非常感谢作者
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4483592, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4483592, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4486045" class="layer">#20楼</a>
+<a name="4486045" id="comment_anchor_4486045"></a>
+
+ 
+<span class="comment_date">2020-01-16 09:33</span>
+
+ 
+
+            <a id="a_comment_author_4486045" href="https://www.cnblogs.com/orange-233/" target="_blank">orange_lyc</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4486045" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    神！！！<br>（博客特效怎么做/手动滑稽/）
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4486045, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4486045, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4486045_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1845215/20191022191929.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4486046" class="layer">#21楼</a>
+<a name="4486046" id="comment_anchor_4486046"></a>
+
+ 
+<span class="comment_date">2020-01-16 09:33</span>
+
+ 
+
+            <a id="a_comment_author_4486046" href="https://www.cnblogs.com/ziyuan122625/" target="_blank">LZY_AK_IOI</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4486046" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    神~~<br>（博客特效怎么做/
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4486046, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4486046, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4486046_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1851922/20191029212505.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4491827" class="layer">#22楼</a>
+<a name="4491827" id="comment_anchor_4491827"></a>
+
+ 
+<span class="comment_date">2020-02-01 12:30</span>
+
+ 
+
+            <a id="a_comment_author_4491827" href="https://home.cnblogs.com/u/1654662/" target="_blank">Solo_Dance</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4491827" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    您好， 写的很棒， 请问由进阶讲解吗~
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4491827, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4491827, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4493520" class="layer">#23楼</a>
+<a name="4493520" id="comment_anchor_4493520"></a>
+[<span class="louzhu">楼主</span>]
+ 
+<span class="comment_date">2020-02-05 15:04</span>
+
+ 
+
+            <a id="a_comment_author_4493520" href="https://www.cnblogs.com/xenny/" target="_blank">Xenny</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4493520" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    <a href="https://www.cnblogs.com/xenny/p/9739600.html#4491827" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,4491827);">@</a>
+Solo_Dance<br>可能吧 (
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4493520, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4493520, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4493520_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1448672/20180723193435.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4495307" class="layer">#24楼</a>
+<a name="4495307" id="comment_anchor_4495307"></a>
+
+ 
+<span class="comment_date">2020-02-09 16:38</span>
+
+ 
+
+            <a id="a_comment_author_4495307" href="https://home.cnblogs.com/u/1938759/" target="_blank">翰林醉花阴</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4495307" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    博主nb！
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4495307, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4495307, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4498308" class="layer">#25楼</a>
+<a name="4498308" id="comment_anchor_4498308"></a>
+
+ 
+<span class="comment_date">2020-02-14 21:54</span>
+
+ 
+
+            <a id="a_comment_author_4498308" href="https://www.cnblogs.com/szdytom/" target="_blank">szTom</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4498308" data-format-type="Ubb" class="blog_comment_body cnblogs-ubb">
+    图画的很好
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4498308, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4498308, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        <span id="comment_4498308_avatar" style="display:none">
+            https://pic.cnblogs.com/face/1336810/20191004133734.png
+        </span>
+
+			</div>
+		</div>
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;
+
+<span class="comment_actions">
+    
+    
+    
+    
+</span>
+
+
+				</div>
+				
+<a href="https://www.cnblogs.com/xenny/p/9739600.html#4514116" class="layer">#26楼</a>
+<a name="4514116" id="comment_anchor_4514116"></a>
+
+        <span id="comment-maxId" style="display:none">4514116</span>
+        <span id="comment-maxDate" style="display:none">2020/3/6 下午10:11:35</span>
+ 
+<span class="comment_date">2020-03-06 22:11</span>
+
+ 
+
+            <a id="a_comment_author_4514116" href="https://home.cnblogs.com/u/1963075/" target="_blank">kuoji</a>
+
+			</div>
+			<div class="feedbackCon">
+				
+<div id="comment_body_4514116" data-format-type="Markdown" class="blog_comment_body cnblogs-markdown">
+    <p>写的太棒了！</p>
+
+</div>
+        <div class="comment_vote">
+            <span class="comment_error" style="color: red"></span>
+            <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4514116, &#39;Digg&#39;, this.parentElement, false);">
+                支持(0)
+            </a>
+            <a href="javascript:void(0);" class="comment_burry" onclick="return voteComment(4514116, &#39;Bury&#39;, this.parentElement, false);">
+                反对(0)
+            </a>
+        </div>
+        
+
+			</div>
+		</div>
+
+<div id="comment_pager_bottom">
+    
+</div>
+
+
+</div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/xenny/p/9739600.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/xenny/p/9739600.html#top">返回顶部</a></div>
+    <div id="comment_form_container" style="visibility: visible;"><div class="login_tips">
+    注册用户登录后才能发表评论，请 
+    <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a>
+     或 
+    <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，
+    <a href="https://www.cnblogs.com/">访问</a> 网站首页。
+</div></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-ucancode&#39;)">【推荐】超50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://developer.aliyun.com/topic/mvp/time11?utm_content=g_1000106550" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-阿里云开发者社区&#39;)">【推荐】58到家技术VP沈剑的架构师成长之路</a><br><a href="https://developer.aliyun.com/article/743756?utm_content=g_1000104139" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-阿里云开发者社区&#39;)">【推荐】Java经典面试题整理及答案详解（二）</a><br><a href="https://developer.aliyun.com/article/740846?utm_content=g_1000104142" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-阿里云开发者社区&#39;)">【推荐】2019必看8大技术大会＆300+公开课全集（500+PDF下载）</a><br></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="./树状数组详解 - Xenny - 博客园_files/gpt.js.下载"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block" style="">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;" data-google-query-id="COfxkPi3iOgCFUSylgodaQIBEg"><div id="google_ads_iframe_/1090369/C1_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C1_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C1_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" data-google-container-id="1" data-load-complete="true" style="border: 0px; vertical-align: bottom;" src="./树状数组详解 - Xenny - 博客园_files/saved_resource.html"></iframe></div></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block" style="">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;" data-google-query-id="COnxkPi3iOgCFUSylgodaQIBEg">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        <div id="google_ads_iframe_/1090369/C2_0__container__" style="border: 0pt none; width: 468px; height: 60px;"></div></div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem"><!--done-->
+<h3 class="catListTitle">公告</h3>
+
+<div id="blog-news">
+    <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=229449645&amp;site=qq&amp;menu=yes">
+<img border="0" src="./树状数组详解 - Xenny - 博客园_files/pa" alt="有事您Q我" title="有事您Q我">
+</a>
+<img width="160" height="160" class="img_avatar" alt="我的头像" src="./树状数组详解 - Xenny - 博客园_files/598187babf39e.webp">
+<p>以梦为马，不负韶华</p>
+<br><p>ACMer CTFer</p>
+<br><p>学习算法，梦想网安</p>
+<br><p>交个朋友吧 =7= QQ:229449645（这个号不常用了），244449645</p>
+<object type="application/x-shockwave-flash" style="outline:none;" data="./树状数组详解 - Xenny - 博客园_files/hamster.swf.下载" width="150" height="160">
+<param name="movie" value="http://cdn.abowman.com/widgets/hamster/hamster.swf?">
+<param name="AllowScriptAccess" value="always">
+<param name="wmode" value="opaque">
+</object>
+
+<!-- 签名 -->
+<div class="autograph">
+  <p>你好啊，很高兴你来到我的博客，博主Xenny现在正在制作一个OJ，Xenny尽量让它成为算法爱好者心目中最好的OJ，现在处于测试阶段，如果你也是算法爱好者的话，请来帮助我一起完善这个OJ吧。欢迎加入测试交流群：92220895。本blog后面隔很久没有更新了也是因为这个项目的原因，后面也会在这上面分享本次项目的一些经验。谢谢支持</p>
+</div>
+    <div id="profile_block">
+        昵称：
+        <a href="https://home.cnblogs.com/u/xenny/">
+            Xenny
+        </a>
+        <br>
+        园龄：
+        <a href="https://home.cnblogs.com/u/xenny/" title="入园时间：2018-07-23">
+            1年7个月
+        </a>
+        <br>
+        粉丝：
+        <a href="https://home.cnblogs.com/u/xenny/followers/">
+            88
+        </a>
+        <br>
+        关注：
+        <a href="https://home.cnblogs.com/u/xenny/followees/">
+            2
+        </a>
+        <div id="p_b_follow">
+<a href="javascript:void(0)" onclick="follow(&#39;830c2b5b-688c-40a7-3330-08d5f07434ca&#39;)">+加关注</a></div>
+        <script>getFollowStatus('830c2b5b-688c-40a7-3330-08d5f07434ca');</script>
+    </div>
+</div>
+
+</div>
+
+			<div id="blog-calendar" style="">
+
+<table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar" border="0">
+    <tbody>
+        <tr>
+            <td colspan="7">
+                <table class="CalTitle" cellspacing="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="CalNextPrev">
+                                <a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2020/02/07&#39;); return false;">&lt;</a>
+                            </td>
+                            <td align="center">2020年3月</td>
+                            <td align="right" class="CalNextPrev">
+                                <a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2020/04/07&#39;); return false;">&gt;</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+                    <th class="CalDayHeader" align="center" abbr="日" scope="col">日</th>
+                    <th class="CalDayHeader" align="center" abbr="一" scope="col">一</th>
+                    <th class="CalDayHeader" align="center" abbr="二" scope="col">二</th>
+                    <th class="CalDayHeader" align="center" abbr="三" scope="col">三</th>
+                    <th class="CalDayHeader" align="center" abbr="四" scope="col">四</th>
+                    <th class="CalDayHeader" align="center" abbr="五" scope="col">五</th>
+                    <th class="CalDayHeader" align="center" abbr="六" scope="col">六</th>
+        </tr>
+            <tr>
+                        <td class="CalWeekendDay" align="center">
+                            1
+                        </td>
+                        <td class="" align="center">
+                            2
+                        </td>
+                        <td class="" align="center">
+                            3
+                        </td>
+                        <td class="" align="center">
+                            4
+                        </td>
+                        <td class="" align="center">
+                            5
+                        </td>
+                        <td class="" align="center">
+                            6
+                        </td>
+                    <td class="CalTodayDay" align="center">
+                        7
+                    </td>
+            </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            8
+                        </td>
+                            <td class="" align="center">
+                                9
+                            </td>
+                            <td class="" align="center">
+                                10
+                            </td>
+                            <td class="" align="center">
+                                11
+                            </td>
+                            <td class="" align="center">
+                                12
+                            </td>
+                            <td class="" align="center">
+                                13
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            14
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            15
+                        </td>
+                            <td class="" align="center">
+                                16
+                            </td>
+                            <td class="" align="center">
+                                17
+                            </td>
+                            <td class="" align="center">
+                                18
+                            </td>
+                            <td class="" align="center">
+                                19
+                            </td>
+                            <td class="" align="center">
+                                20
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            21
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            22
+                        </td>
+                            <td class="" align="center">
+                                23
+                            </td>
+                            <td class="" align="center">
+                                24
+                            </td>
+                            <td class="" align="center">
+                                25
+                            </td>
+                            <td class="" align="center">
+                                26
+                            </td>
+                            <td class="" align="center">
+                                27
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            28
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            29
+                        </td>
+                            <td class="" align="center">
+                                30
+                            </td>
+                            <td class="" align="center">
+                                31
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                1
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                2
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                3
+                            </td>
+                        <td class="CalOtherMonthDay" align="center">
+                            4
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalOtherMonthDay" align="center">
+                            5
+                        </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                6
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                7
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                8
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                9
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                10
+                            </td>
+                        <td class="CalOtherMonthDay" align="center">
+                            11
+                        </td>
+                </tr>
+    </tbody>
+</table></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn">
+<!-- 搜索 -->
+<div id="sidebar_search" class="sidebar-block">
+    <div id="sidebar_search" class="mySearch">
+        <h3 class="catListTitle">搜索</h3>
+        <div id="sidebar_search_box">
+            <div id="widget_my_zzk" class="div_my_zzk">
+                <input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk">
+            </div>
+            <div id="widget_my_google" class="div_my_zzk">
+                <input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 常用链接 -->
+<div id="sidebar_shortcut" class="sidebar-block">
+    <div class="catListLink">
+<h3 class="catListTitle">
+常用链接
+</h3>
+<ul>
+		<li>
+
+<a href="https://www.cnblogs.com/xenny/p/" title="我的博客的随笔列表">我的随笔</a>
+</li>
+		<li>
+
+<a href="https://www.cnblogs.com/xenny/MyComments.html" title="我的发表过的评论列表">我的评论</a>
+</li>
+		<li>
+
+<a href="https://www.cnblogs.com/xenny/OtherPosts.html" title="我评论过的随笔列表">我的参与</a>
+</li>
+		<li>
+
+<a href="https://www.cnblogs.com/xenny/RecentComments.html" title="我的博客的评论列表">最新评论</a>
+</li>
+		<li>
+
+<a href="https://www.cnblogs.com/xenny/tag/" title="我的博客的标签列表">我的标签</a>
+</li>
+
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div>
+
+
+</div>
+
+<!-- 最新随笔 -->
+
+
+
+<!-- 我的标签 -->
+<div id="sidebar_toptags" class="sidebar-block">
+    <div class="catListTag">
+<h3 class="catListTitle">我的标签</h3>
+<ul>
+
+        <li>
+            <a href="https://www.cnblogs.com/xenny/tag/C%2B%2B/">C++</a>(25)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/xenny/tag/ACM/">ACM</a>(21)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/xenny/tag/STL/">STL</a>(19)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/xenny/tag/FJUT%20-%20OJ/">FJUT - OJ</a>(15)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/xenny/tag/%E6%90%9C%E7%B4%A2/">搜索</a>(13)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/xenny/tag/HDU%20-%20OJ/">HDU - OJ</a>(11)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/xenny/tag/BFS/">BFS</a>(11)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/xenny/tag/CTF/">CTF</a>(8)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/xenny/tag/%E7%AE%97%E6%B3%95/">算法</a>(8)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/xenny/tag/DFS/">DFS</a>(7)
+        </li>
+            <li>
+                <a href="https://www.cnblogs.com/xenny/tag/">更多</a>
+            </li>
+
+</ul>
+</div>
+
+
+</div>
+
+<!-- 积分与排名 -->
+<div id="sidebar_scorerank" class="sidebar-block">
+    <div class="catListBlogRank">
+<h3 class="catListTitle">积分与排名</h3>
+<ul>
+	<li class="liScore">
+		积分 -	
+45837
+	</li>
+	<li class="liRank">
+		排名 -	
+16423
+	</li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+<!-- 随笔分类、随笔档案、文章分类、新闻分类、相册、链接 -->
+<div id="sidebar_categories">
+    
+        <div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+            <h3 class="catListTitle">
+                
+
+随笔分类
+
+
+
+            </h3>
+
+
+            <ul>
+
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1261311.html" rel="" target="">
+    ACM(24)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1264338.html" rel="" target="">
+    C++(24)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1290080.html" rel="" target="">
+    CTF(13)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1263997.html" rel="" target="">
+    FJUT - OJ(15)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1264387.html" rel="" target="">
+    HDU - OJ(11)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1260658.html" rel="" target="">
+    Hola! How are u.(5)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1543241.html" rel="" target="">
+    Java(1)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1551376.html" rel="" target="">
+    MySQL(2)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1551378.html" rel="" target="">
+    PHP(2)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1277576.html" rel="" target="">
+    POJ - OJ(2)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1365559.html" rel="" target="">
+    Python(4)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1551375.html" rel="" target="">
+    SQL(2)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1551379.html" rel="" target="">
+    SQL注入(3)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1261419.html" rel="" target="">
+    STL大全(12)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1300770.html" rel="" target="">
+    SWPU周赛(4)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1261358.html" rel="" target="">
+    动态规划：树形DP(1)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1312462.html" rel="" target="">
+    数据结构(5)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1260611.html" rel="" target="">
+    搜索：BFS(13)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1264604.html" rel="" target="">
+    搜索：DFS(5)
+</a>
+ 
+
+                        </li>
+
+            </ul>
+
+
+        </div>
+        <div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+            <h3 class="catListTitle">
+                
+
+随笔档案
+
+
+
+            </h3>
+
+
+            <ul>
+
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/archive/2019/12.html" rel="" target="">
+    2019年12月(1)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/archive/2019/09.html" rel="" target="">
+    2019年9月(3)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/archive/2019/08.html" rel="" target="">
+    2019年8月(2)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/archive/2019/07.html" rel="" target="">
+    2019年7月(1)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/archive/2019/01.html" rel="" target="">
+    2019年1月(2)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/archive/2018/12.html" rel="" target="">
+    2018年12月(11)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/archive/2018/11.html" rel="" target="">
+    2018年11月(4)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/archive/2018/10.html" rel="" target="">
+    2018年10月(7)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/archive/2018/09.html" rel="" target="">
+    2018年9月(5)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/archive/2018/08.html" rel="" target="">
+    2018年8月(10)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/archive/2018/07.html" rel="" target="">
+    2018年7月(19)
+</a>
+ 
+
+                        </li>
+
+            </ul>
+
+
+        </div>
+        <div id="sidebar_articlecategory" class="catListArticleCategory sidebar-block">
+            <h3 class="catListTitle">
+                
+
+文章分类
+
+
+
+            </h3>
+
+
+            <ul>
+
+                        <li>
+                            
+<a href="https://www.cnblogs.com/xenny/category/1260645.html" rel="" target="">
+    Hola! How are u.
+</a>
+ 
+
+                        </li>
+
+            </ul>
+
+
+        </div>
+        <div id="sidebar_companion of acm！" class="catListcompanion of ACM！ sidebar-block">
+            <h3 class="catListTitle">
+                
+
+ACM队友
+
+
+
+            </h3>
+
+
+            <ul>
+
+                        <li>
+                            
+<a href="https://www.cnblogs.com/cxylsy/" rel="nofollow noopener noreferrer" target="_blank">
+    队长Lsy
+</a>
+ 
+
+                        </li>
+
+            </ul>
+
+
+        </div>
+        <div id="sidebar_qwq" class="catListqwq sidebar-block">
+            <h3 class="catListTitle">
+                
+
+友链
+
+
+
+            </h3>
+
+
+            <ul>
+
+                        <li>
+                            
+<a href="https://www.cnblogs.com/juruohx/" rel="nofollow noopener noreferrer" target="_blank">
+    小菜兔
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://zbww.cf/" rel="nofollow noopener noreferrer" target="_blank">
+    ZBWW
+</a>
+ 
+
+                        </li>
+
+            </ul>
+
+
+        </div>
+
+</div>
+
+<!-- 最新评论 -->
+<div id="sidebar_recentcomments" class="sidebar-block">
+    <div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div class="RecentCommentBlock">
+        <ul>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/xenny/p/9739600.html#4514116">1. Re:树状数组详解</a></li>
+                    <li class="recent_comment_body"><p>写的太棒了！</p>
+</li>
+                    <li class="recent_comment_author">--kuoji</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/xenny/p/9801703.html#4510617">2. Re:线段树详解</a></li>
+                    <li class="recent_comment_body"><h2 id="akap">3.1点更新代码中， a[k]应更改为a[p]</h2>
+</li>
+                    <li class="recent_comment_author">--3532</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/xenny/p/9739600.html#4498308">3. Re:树状数组详解</a></li>
+                    <li class="recent_comment_body">图画的很好</li>
+                    <li class="recent_comment_author">--szTom</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/xenny/p/9739600.html#4495307">4. Re:树状数组详解</a></li>
+                    <li class="recent_comment_body">博主nb！</li>
+                    <li class="recent_comment_author">--翰林醉花阴</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/xenny/p/9739600.html#4493520">5. Re:树状数组详解</a></li>
+                    <li class="recent_comment_body">@ Solo_Dance可能吧 (...</li>
+                    <li class="recent_comment_author">--Xenny</li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+
+
+<!-- 阅读排行榜 -->
+<div id="sidebar_topviewedposts" class="sidebar-block">
+    <div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock">
+        <ul style="word-break:break-all">
+                    <li>
+                        <a href="https://www.cnblogs.com/xenny/p/9739600.html">
+                            1. 树状数组详解(23428)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/xenny/p/10139988.html">
+                            2. Visual Studio Code安装以及C/C++运行环境搭建(12297)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/xenny/p/9801703.html">
+                            3. 线段树详解(7067)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/xenny/p/9410888.html">
+                            4. ACM卡常数（各种玄学优化）(5049)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/xenny/p/10140151.html">
+                            5. Visual Studio Code安装Python环境(3980)
+                        </a>
+                    </li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+<!-- 评论排行榜 -->
+<div id="sidebar_topcommentedposts" class="sidebar-block">
+    <div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock">
+        <ul style="word-break:break-all">
+                    <li>
+                        <a href="https://www.cnblogs.com/xenny/p/9739600.html">
+                            1. 树状数组详解(26)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/xenny/p/9801703.html">
+                            2. 线段树详解(14)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/xenny/p/10139988.html">
+                            3. Visual Studio Code安装以及C/C++运行环境搭建(6)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/xenny/p/9410888.html">
+                            4. ACM卡常数（各种玄学优化）(4)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/xenny/p/10275352.html">
+                            5. 关于针对本校教务系统漏洞的一次信息检索(3)
+                        </a>
+                    </li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+<!-- 推荐排行榜 -->
+<div id="sidebar_topdiggedposts" class="sidebar-block">
+    
+<div id="topdigg_posts_wrap">
+    <div class="catListView">
+        <h3 class="catListTitle">推荐排行榜</h3>
+        <div id="TopDiggPostsBlock">
+            <ul style="word-break: break-all">
+                        <li>
+                            <a href="https://www.cnblogs.com/xenny/p/9739600.html">
+                                1. 树状数组详解(123)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/xenny/p/9801703.html">
+                                2. 线段树详解(21)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/xenny/p/9410888.html">
+                                3. ACM卡常数（各种玄学优化）(17)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/xenny/p/10275352.html">
+                                4. 关于针对本校教务系统漏洞的一次信息检索(7)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/xenny/p/11552645.html">
+                                5. SQL手工注入基础篇(4)
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright © 2020 Xenny
+<br><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script type="text/javascript" language="javascript"> 
+//为右下角推荐推荐区域添加关注按钮
+window.onload = function () {
+    $('#div_digg').prepend('<div style="padding-bottom: 5px"><span class="icon_favorite" style="padding-top: 2px"></span><a onclick="cnblogs.UserManager.FollowBlogger(\'e1cc9c32-fce8-e611-845c-ac853d9f53ac\');" href="javascript:void(0);" style="font-weight: bold; padding-left:5px;">关注一下Xenny吧</a> </div>');
+}
+
+<script src="https://files.cnblogs.com/files/miangao/bootstrap.min.js"></script>
+<script type="text/javascript">
+// 博客签名脚本 //
+    function btn_donateClick() {
+        var DivPopup = document.getElementById('Div_popup');
+        var DivMasklayer = document.getElementById('div_masklayer');
+        DivMasklayer.style.display = 'block';
+        DivPopup.style.display = 'block';
+        var h = Div_popup.clientHeight;
+        with (Div_popup.style) {
+            marginTop = -h / 2 + 'px';
+        }
+    }
+
+    function MasklayerClick() {
+
+        var masklayer = document.getElementById('div_masklayer');
+        var divImg = document.getElementById("Div_popup"); 
+        masklayer.style.display = "none";
+        divImg.style.display = "none";
+    }
+
+    setTimeout(
+        function () {
+            document.getElementById('div_masklayer').onclick = MasklayerClick;
+            document.getElementById('btn_donate').onclick = btn_donateClick;
+            var a_gzw = document.getElementById("guanzhuwo");
+            a_gzw.href = "javascript:void(0);";
+            $("#guanzhuwo").attr("onclick","follow('33513f9f-ba13-e011-ac81-842b2b196315');");
+        }, 900);
+
+
+</script>
+
+
+
+<script type="text/javascript" language="javascript">
+　　//Setting ico for cnblogs
+　　var linkObject = document.createElement('link');
+　　linkObject.rel = "shortcut icon";
+　　linkObject.href = "https://files.cnblogs.com/files/xenny/favicon.ico";
+　　document.getElementsByTagName("head")[0].appendChild(linkObject);
+</script>
+
+<script src="./树状数组详解 - Xenny - 博客园_files/jquery-migrate-1.2.1.js.下载"></script>
+<div id="scrollTop" style="display: none;">
+      <div class="level-2"></div>
+      <div class="level-3"></div>
+</div>
+<script src="./树状数组详解 - Xenny - 博客园_files/scroll2top.js.下载"></script>
+<script type="text/javascript">
+    UI.global_search();
+    var uvOptions = {};
+    // !important
+    (function() {
+        initScrollTop();
+    })();
+</script>
+
+<script src="./树状数组详解 - Xenny - 博客园_files/prettify.js.下载"></script>
+<script type="text/javascript">
+$(function() {
+     $("pre").addClass("prettyprint");
+     prettyPrint();
+});
+</script>
+
+    </div>
+
+<canvas id="c_n27" width="2560" height="1318" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas></body></html>
