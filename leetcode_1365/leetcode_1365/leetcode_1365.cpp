@@ -4,9 +4,12 @@
 #include "stdafx.h"
 #include <string>
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <map>
 using namespace std;
 
-class Solution {
+class Solution1 {
 public:
 	string compressString(string S) {
 		string copy;
@@ -34,11 +37,42 @@ public:
 	}
 };
 
+class Solution {
+public:
+	vector<int> smallerNumbersThanCurrent(vector<int>& nums) {
+		vector<int> ret;
+		if (nums.empty())
+			return ret;
+		vector<int> num(nums.begin(), nums.end());
+		sort(num.begin(), num.end());
+		map<int, pair<int,int>> mp;
+		map<int, pair<int, int>>::iterator it;
+		for (auto i : num) {
+			it = mp.find(i);
+			if (it == mp.end())
+			{
+				int pre = 0;
+				if (mp.size())
+					pre = mp.rbegin()->second.second + mp.rbegin()->second.first;
+				mp.emplace(make_pair(i, make_pair(1,pre)));
+			}
+			else
+				++it->second.first;
+		}
+		for (auto i : nums)
+			ret.emplace_back(mp[i].second);
+		return ret;
+	}
+};
+
 int main()
 {
 	Solution s;
-	string _s = "aabcccccaaa";
-	cout << s.compressString(_s) << endl;
-    return 0;
+	vector<int> vt = { 8,1,2,2,3 };
+	s.smallerNumbersThanCurrent(vt);
+	//Solution1 s;
+	//string _s = "aabcccccaaa";
+//	cout << s.compressString(_s) << endl;
+	return 0;
 }
 
